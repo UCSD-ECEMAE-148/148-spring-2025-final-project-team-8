@@ -1,17 +1,17 @@
 import rclpy
 from rclpy.node import Node
-from sensor_msgs.msg import String
+from std_msgs.msg import String
 
 NODE_NAME = "target_node"
 PROMPT_TOPIC = "/prompts"
 
 class Target(Node):
   def __init__(self):
-    super.__init__(NODE_NAME)
+    super().__init__(NODE_NAME)
     self.prompt_listener = self.create_subscription(String, PROMPT_TOPIC, self.handle_prompt, 10)
   
   def handle_prompt(self, data):
-    self.get_logger().info(data)
+    self.get_logger().info(data.data)
   
 def main():
   rclpy.init()

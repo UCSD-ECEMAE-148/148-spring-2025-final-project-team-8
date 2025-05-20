@@ -8,7 +8,7 @@ def generate_launch_description():
     ld = LaunchDescription()
 
     calibration_node = Node(
-        package,
+        package=package,
         executable=node_name,
         output='screen')
         
