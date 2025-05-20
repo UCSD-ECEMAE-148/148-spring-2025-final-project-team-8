@@ -6,10 +6,12 @@ import depthai as dai
 import numpy as np
 
 NODE_NAME = "depth_node"
+DEPTH_TOPIC = "/depths"
 
 class Depth(Node):
   def __init__(self):
     super().__init__(NODE_NAME)
+    self.depth_publisher = self.create_publisher(
 
     self.create_pipeline()
   
@@ -44,25 +46,26 @@ class Depth(Node):
     depth.disparity.link(xout.input)
 
     # Connect to device and start pipeline
-    with dai.Device(pipeline) as device:
-
-        # Output queue will be used to get the disparity frames from the outputs defined above
-        q = device.getOutputQueue(name="disparity", maxSize=4, blocking=False)
+    self.device = dai.Device(pipeline)
+    # Output queue will be used to get the disparity frames from the outputs defined above
+    self.queue = device.getOutputQueue(name="disparity", maxSize=4, blocking=True)
+    self.maxDisparity = depth.initialConfig.getMaxDisparity()
 
         while True:
             inDisparity = q.get()  # blocking call, will wait until a new data has arrived
             self.get_logger().info("Frame received!")
             frame = inDisparity.getFrame()
+            frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
             # Normalization for better visualization
-            frame = (frame * (255 / depth.initialConfig.getMaxDisparity())).astype(np.uint8)
+            frame = (frame * (255 / maxDisparity)).astype(np.uint8)
 
             #uncomment to show mono
             #cv2.imshow("disparity", frame)
 
             # Available color maps: https://docs.opencv.org/3.4/d3/d50/group__imgproc__colormap.html
-            frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
-            cv2.imshow("disparity_color", frame)
-            self.get_logger().info("Frame rendered!")
+            #frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
+            #cv2.imshow("disparity_color", frame)
+            #self.get_logger().info("Frame rendered!")
 
             if cv2.waitKey(1) == ord('q'):
                 break
