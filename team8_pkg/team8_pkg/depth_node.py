@@ -3,18 +3,20 @@ from rclpy.node import Node
 from sensor_msgs.msg import Image
 from std_msgs.msg import String
 import cv2
+from cv_bridge import CvBridge
 import depthai as dai
 import numpy as np
 
 NODE_NAME = "depth_node"
 DEPTH_TOPIC = "/disparities"
 FREQUENCY = 0.05
-DISPLAY_DEPTH = False
+DISPLAY_DEPTH = True
 
 class Depth(Node):
   def __init__(self):
     super().__init__(NODE_NAME)
     self.depth_publisher = self.create_publisher(Image, DEPTH_TOPIC, 10)
+    self.bridge = CvBridge()
 
     self.create_pipeline()
     self.timer = self.create_timer(0.05, self.publish_depth)
@@ -54,7 +56,7 @@ class Depth(Node):
     # Connect to device and start pipeline
     self.device = dai.Device(pipeline)
     # Output queue will be used to get the disparity frames from the outputs defined above
-    self.queue = self.device.getOutputQueue(name="disparity", maxSize=4, blocking=True)
+    self.queue = self.device.getOutputQueue(name="disparity", maxSize=4, blocking=False)
     self.maxDisparity = depth.initialConfig.getMaxDisparity()
 
   def publish_depth(self):
@@ -68,6 +70,7 @@ class Depth(Node):
     frame = self.bridge.imgmsg_to_cv2(data, desired_encoding="passthrough")
     frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
     cv2.imshow("disparity_color", frame)
+    cv2.waitKey(1)
 
 def main():
   rclpy.init()
