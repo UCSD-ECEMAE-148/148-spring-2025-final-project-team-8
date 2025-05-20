@@ -3,6 +3,7 @@ from rclpy.node import Node
 from std_msgs.msg import String
 import cv2
 import depthai as dai
+import numpy as np
 
 NODE_NAME = "depth_node"
 
@@ -25,17 +26,17 @@ class Depth(Node):
 
     # Properties
     monoLeft.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
-    monoLeft.setCamera("left")
+    monoLeft.setBoardSocket(dai.CameraBoardSocket.LEFT)
     monoRight.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
-    monoRight.setCamera("right")
+    monoRight.setBoardSocket(dai.CameraBoardSocket.RIGHT)
 
     # Create a node that will produce the depth map (using disparity output as it's easier to visualize depth this way)
     depth.setDefaultProfilePreset(dai.node.StereoDepth.PresetMode.HIGH_DENSITY)
     # Options: MEDIAN_OFF, KERNEL_3x3, KERNEL_5x5, KERNEL_7x7 (default)
     depth.initialConfig.setMedianFilter(dai.MedianFilter.KERNEL_7x7)
-    depth.setLeftRightCheck(lr_check)
-    depth.setExtendedDisparity(extended_disparity)
-    depth.setSubpixel(subpixel)
+    depth.setLeftRightCheck(True)
+    depth.setExtendedDisparity(False)
+    depth.setSubpixel(False)
 
     # Linking
     monoLeft.out.link(depth.left)
@@ -50,15 +51,18 @@ class Depth(Node):
 
         while True:
             inDisparity = q.get()  # blocking call, will wait until a new data has arrived
+            self.get_logger().info("Frame received!")
             frame = inDisparity.getFrame()
             # Normalization for better visualization
             frame = (frame * (255 / depth.initialConfig.getMaxDisparity())).astype(np.uint8)
 
-            cv2.imshow("disparity", frame)
+            #uncomment to show mono
+            #cv2.imshow("disparity", frame)
 
             # Available color maps: https://docs.opencv.org/3.4/d3/d50/group__imgproc__colormap.html
             frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
             cv2.imshow("disparity_color", frame)
+            self.get_logger().info("Frame rendered!")
 
             if cv2.waitKey(1) == ord('q'):
                 break
