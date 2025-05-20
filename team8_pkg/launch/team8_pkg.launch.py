@@ -7,11 +7,17 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    calibration_node = Node(
+    """target_node = Node(
         package=package,
         executable=node_name,
-        output='screen')
+        output='screen')"""
+  
+    depth_node = Node(
+        package=package,
+        executable='depth_node',
+        output='screen'
+    )
         
-    ld.add_action(calibration_node)
+    ld.add_action(depth_node)
     return ld
 
