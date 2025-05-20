@@ -23,7 +23,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            "target_node = team8_pkg.target_node:main"
+            "target_node = team8_pkg.target_node:main",
+            "depth_node = team8_pkg.depth_node:main"
         ],
     },
 )
