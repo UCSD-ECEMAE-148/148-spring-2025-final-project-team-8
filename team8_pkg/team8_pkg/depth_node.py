@@ -1,19 +1,25 @@
 import rclpy
 from rclpy.node import Node
+from sensor_msgs.msg import Image
 from std_msgs.msg import String
 import cv2
 import depthai as dai
 import numpy as np
 
 NODE_NAME = "depth_node"
-DEPTH_TOPIC = "/depths"
+DEPTH_TOPIC = "/disparities"
+FREQUENCY = 0.05
+DISPLAY_DEPTH = False
 
 class Depth(Node):
   def __init__(self):
     super().__init__(NODE_NAME)
-    self.depth_publisher = self.create_publisher(
+    self.depth_publisher = self.create_publisher(Image, DEPTH_TOPIC, 10)
 
     self.create_pipeline()
+    self.timer = self.create_timer(0.05, self.publish_depth)
+    if DISPLAY_DEPTH:
+      self.depth_viewer = self.create_subscription(Image, DEPTH_TOPIC, self.display_depth, 10)  
   
   def create_pipeline(self):
     pipeline = dai.Pipeline()
@@ -48,28 +54,20 @@ class Depth(Node):
     # Connect to device and start pipeline
     self.device = dai.Device(pipeline)
     # Output queue will be used to get the disparity frames from the outputs defined above
-    self.queue = device.getOutputQueue(name="disparity", maxSize=4, blocking=True)
+    self.queue = self.device.getOutputQueue(name="disparity", maxSize=4, blocking=True)
     self.maxDisparity = depth.initialConfig.getMaxDisparity()
 
-        while True:
-            inDisparity = q.get()  # blocking call, will wait until a new data has arrived
-            self.get_logger().info("Frame received!")
-            frame = inDisparity.getFrame()
-            frame = cv2.resize(frame, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
-            # Normalization for better visualization
-            frame = (frame * (255 / maxDisparity)).astype(np.uint8)
+  def publish_depth(self):
+    inDisparity = self.queue.get()
+    frame = inDisparity.getFrame()
+    frame = (frame * (255 / self.maxDisparity)).astype(np.uint8)
+    image = self.bridge.cv2_to_imgmsg(frame, encoding="mono8")
+    self.depth_publisher.publish(image)
 
-            #uncomment to show mono
-            #cv2.imshow("disparity", frame)
-
-            # Available color maps: https://docs.opencv.org/3.4/d3/d50/group__imgproc__colormap.html
-            #frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
-            #cv2.imshow("disparity_color", frame)
-            #self.get_logger().info("Frame rendered!")
-
-            if cv2.waitKey(1) == ord('q'):
-                break
-
+  def display_depth(self, data):
+    frame = self.bridge.imgmsg_to_cv2(data, desired_encoding="passthrough")
+    frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
+    cv2.imshow("disparity_color", frame)
 
 def main():
   rclpy.init()
