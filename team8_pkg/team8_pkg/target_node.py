@@ -2,8 +2,12 @@ import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
 
+from google import genai
+
 NODE_NAME = "target_node"
 PROMPT_TOPIC = "/prompts"
+
+client = genai.Client(api_key="AIzaSyAKcwfdHu1iRh4ZWRVyaT55rd39OypqyrU")
 
 class Target(Node):
   def __init__(self):
@@ -11,7 +15,11 @@ class Target(Node):
     self.prompt_listener = self.create_subscription(String, PROMPT_TOPIC, self.handle_prompt, 10)
   
   def handle_prompt(self, data):
-    self.get_logger().info(data.data)
+    response = client.models.generate_content(
+    model="gemini-2.0-flash",
+    contents=data.data,
+    )
+    self.get_logger().info(response.text)
   
 def main():
   rclpy.init()
