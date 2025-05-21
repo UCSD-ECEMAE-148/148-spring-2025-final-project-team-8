@@ -3,11 +3,15 @@ from rclpy.node import Node
 from std_msgs.msg import String
 
 from google import genai
+import requests
+import os
 
 NODE_NAME = "target_node"
 PROMPT_TOPIC = "/prompts"
+API_KEY = os.getenv("GOOGLE_API_KEY")
+MODEL_NAME = 'gemini-2.0-flash'
+ENDPOINT = f'https://generativelanguage.googleapis.com/v1beta/models/{MODEL_NAME}:generateContent?key={API_KEY}'
 
-client = genai.Client(api_key="AIzaSyAKcwfdHu1iRh4ZWRVyaT55rd39OypqyrU")
 
 class Target(Node):
   def __init__(self):
@@ -15,11 +19,41 @@ class Target(Node):
     self.prompt_listener = self.create_subscription(String, PROMPT_TOPIC, self.handle_prompt, 10)
   
   def handle_prompt(self, data):
-    response = client.models.generate_content(
-    model="gemini-2.0-flash",
-    contents=data.data,
-    )
-    self.get_logger().info(response.text)
+
+    
+    # Load image and convert to base64
+    #with open('your_image.jpg', 'rb') as img_file:
+    #    image_bytes = img_file.read()
+    #    image_base64 = base64.b64encode(image_bytes).decode('utf-8')
+
+    # Construct the request body
+    body = {
+        "contents": [
+            {
+                "parts": [
+                    #{
+                    #    "inline_data": {
+                    #        "mime_type": "image/jpeg",
+                    #        "data": image_base64
+                    #    }
+                    #},
+                    {
+                        "text": data.data
+                    }
+                ]
+            }
+        ]
+    }
+    # Send the POST request
+    response = requests.post(ENDPOINT, json=body)
+
+    # Parse and print the result
+    if response.ok:
+        result = response.json()
+        self.get_logger().info(result["candidates"][0]["content"]["parts"][0]["text"])
+    else:
+        self.get_logger().info(f"Error: {response.status_code}")
+        self.get_logger().info(response.text)
   
 def main():
   rclpy.init()
