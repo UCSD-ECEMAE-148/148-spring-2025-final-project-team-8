@@ -16,24 +16,33 @@ DISPLAY_DEPTH = True
 class Depth(Node):
   def __init__(self):
     super().__init__(NODE_NAME)
-    self.depth_publisher = self.create_publisher(Image, DEPTH_TOPIC, 10)
+    self.depth_publisher = self.create_publisher(CameraData, DEPTH_TOPIC, 10)
     self.bridge = CvBridge()
 
     self.create_pipeline()
     self.timer = self.create_timer(0.05, self.publish_depth)
+    self.data = CameraData()
     if DISPLAY_DEPTH:
-      self.depth_viewer = self.create_subscription(Image, DEPTH_TOPIC, self.display_depth, 10)  
+      self.data_viewer = self.create_subscription(CameraData, DEPTH_TOPIC, self.display_data, 10)  
   
   def create_pipeline(self):
     pipeline = dai.Pipeline()
+
+    #color camera pipeline
+    colorCam = pipeline.create(dai.node.ColorCamera)
+    colorCam.setInterleaved(False)
+    colorCam.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
+    colorCam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_400_P)
+    xout_rgb = pipeline.create(dai.node.XLinkOut)
+    xout_rgb.setStreamName("rgb")
 
     # Define sources and outputs
     monoLeft = pipeline.create(dai.node.MonoCamera)
     monoRight = pipeline.create(dai.node.MonoCamera)
     depth = pipeline.create(dai.node.StereoDepth)
-    xout = pipeline.create(dai.node.XLinkOut)
+    xout_depth = pipeline.create(dai.node.XLinkOut)
 
-    xout.setStreamName("disparity")
+    xout_depth.setStreamName("disparity")
 
     # Properties
     monoLeft.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
@@ -52,23 +61,32 @@ class Depth(Node):
     # Linking
     monoLeft.out.link(depth.left)
     monoRight.out.link(depth.right)
-    depth.disparity.link(xout.input)
+    depth.disparity.link(xout_depth.input)
+    colorCam.preview.link(xout_rgb.input)
 
     # Connect to device and start pipeline
     self.device = dai.Device(pipeline)
     # Output queue will be used to get the disparity frames from the outputs defined above
-    self.queue = self.device.getOutputQueue(name="disparity", maxSize=4, blocking=False)
+    self.queue_disp = self.device.getOutputQueue(name="disparity", maxSize=4, blocking=False)
+    self.queue_rgb = self.device.getOutputQueue(name="rgb", maxSize=4, blocking=False)
     self.maxDisparity = depth.initialConfig.getMaxDisparity()
 
   def publish_depth(self):
-    inDisparity = self.queue.get()
-    frame = inDisparity.getFrame()
-    frame = (frame * (255 / self.maxDisparity)).astype(np.uint8)
-    image = self.bridge.cv2_to_imgmsg(frame, encoding="mono8")
-    self.depth_publisher.publish(image)
+    #depth
+    inDisparity = self.queue_disp.get()
+    disp = inDisparity.getFrame()
+    disp = (disp * (255 / self.maxDisparity)).astype(np.uint8)
+    data.disparity = self.bridge.cv2_to_imgmsg(disp, encoding="mono8")
 
-  def display_depth(self, data):
-    frame = self.bridge.imgmsg_to_cv2(data, desired_encoding="passthrough")
+    # RGB
+    inRgb = self.queue_rgb.get()
+    rgb_frame = inRgb.getCvFrame()
+    data.rgb = self.bridge.cv2_to_imgmsg(rgb_frame, encoding="bgr8")
+
+    self.depth_publisher.publish(data)
+
+  def display_data(self, data):
+    frame = self.bridge.imgmsg_to_cv2(data.disparity, desired_encoding="passthrough")
     frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
     cv2.imshow("disparity_color", frame)
     cv2.waitKey(1)
