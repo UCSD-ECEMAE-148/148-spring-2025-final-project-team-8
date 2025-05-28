@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image
+from team8_pkg.msg import CameraData
 from std_msgs.msg import String
 import cv2
 from cv_bridge import CvBridge

@@ -14,6 +14,8 @@ NODE_NAME = 'lane_detection_node'
 CAMERA_TOPIC_NAME = '/camera/color/image_raw'
 CENTROID_TOPIC_NAME = '/location'
 
+DEPTH_TOPIC_NAME = '/disparities'
+
 # DISTANCE CALCULATION CONST
 ONE_FT_PXL_DIAMETER = 150               # diameter of the object from 1 ft
 DISTANCE_FUNC_COEF = 12 * ONE_FT_PXL_DIAMETER     # store coefficient to reduce calculations
@@ -103,7 +105,6 @@ class LaneDetection(Node):
             f'\nrows_offset_decimal: {self.rows_offset_decimal}'
             f'\ncamera_centerline: {self.camera_centerline}'
             f'\ndebug_cv: {self.debug_cv}')
-
 
     def locate_centroid(self, data):
         # Image processing from rosparams
@@ -203,57 +204,8 @@ class LaneDetection(Node):
                     pass
         # Further image processing to determine optimal steering value
         try:
-            # When more than 1 road mark is found
-            if len(cx_list) > 1:
-                error_list = []
-                count = 0
-
-                # calculate errors for all detected road lines
-                for cx_pos in cx_list:
-                    error = float((cx_pos - cam_center_line_x) / cam_center_line_x)
-                    error_list.append(error)
-                
-                # finding average error of all road lines
-                avg_error = (sum(error_list) / float(len(error_list)))
-
-                # check difference in error from closest to furthest road line
-                p_horizon_diff = abs(error_list[0] - error_list[-1])
-
-                # if path is approximately straight, then steer towards average error
-                if abs(p_horizon_diff) <= self.error_threshold:
-                    error_x = avg_error
-                    pixel_error = int(cam_center_line_x * (1 + error_x))
-                    mid_x, mid_y = pixel_error, int((self.image_height/2))
-                    self.get_logger().info(f"Straight curve: [tracking error: {error_x}]")
-
-                # if path is curved, then steer towards minimum error
-                else: 
-                    # exclude any road lines within error threshold by making their error large
-                    for error in error_list:
-                        if abs(error) < self.error_threshold:
-                            error = 1
-                            error_list[count] = error
-                        count+=1
-                    
-                    # getting min error (closest roadline)
-                    error_x = min(error_list, key=abs)
-
-                    # get index of min error for plotting
-                    error_x_index = error_list.index(min(error_list, key=abs))
-                    mid_x, mid_y = cx_list[error_x_index], cy_list[error_x_index]
-                    self.get_logger().info(f"Curvy road: [tracking error: {error_x}]")
-                
-                # plotting roadline to be tracked
-                cv2.circle(img, (mid_x, mid_y), 7, (255, 0, 0), -1)
-                start_point_error = (cam_center_line_x, mid_y)
-                img = cv2.line(img, start_point_error, (mid_x, mid_y), (0,0,255), 4)
-
-                # publish error data
-                self.centroid_error.data = [float(error_x)]
-                self.centroid_error_publisher.publish(self.centroid_error)
-
             # When only 1 road mark was found 
-            elif len(cx_list) == 1:
+            if len(cx_list) == 1:
                 mid_x, mid_y = cx_list[0], cy_list[0]
                 start_point_error = (cam_center_line_x, mid_y)
                 img = cv2.line(img, start_point_error, (mid_x, mid_y), (0,0,255), 4)
