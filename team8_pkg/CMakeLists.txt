@@ -11,6 +11,7 @@ find_package(rosidl_default_generators REQUIRED)
 # Message generation
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/CameraData.msg"
+  DEPENDENCIES sensor_msgs std_msgs
 )
 
 ament_package()
