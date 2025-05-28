@@ -1,0 +1,54 @@
+[3.516s] Invoking command in '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/team8_pkg': PYTHONPATH=/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/team8_pkg build --build-base /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build install --prefix /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg --record /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/install.log --single-version-externally-managed
+[4.672s] running egg_info
+[4.674s] creating ../build/team8_pkg/team8_pkg.egg-info
+[4.675s] writing ../build/team8_pkg/team8_pkg.egg-info/PKG-INFO
+[4.676s] writing dependency_links to ../build/team8_pkg/team8_pkg.egg-info/dependency_links.txt
+[4.676s] writing entry points to ../build/team8_pkg/team8_pkg.egg-info/entry_points.txt
+[4.677s] writing requirements to ../build/team8_pkg/team8_pkg.egg-info/requires.txt
+[4.677s] writing top-level names to ../build/team8_pkg/team8_pkg.egg-info/top_level.txt
+[4.688s] writing manifest file '../build/team8_pkg/team8_pkg.egg-info/SOURCES.txt'
+[4.842s] reading manifest file '../build/team8_pkg/team8_pkg.egg-info/SOURCES.txt'
+[4.845s] writing manifest file '../build/team8_pkg/team8_pkg.egg-info/SOURCES.txt'
+[4.846s] running build
+[4.846s] running build_py
+[4.847s] creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build
+[4.847s] creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib
+[4.848s] creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg
+[4.848s] copying team8_pkg/__init__.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg
+[4.849s] copying team8_pkg/lane_guidance_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg
+[4.849s] copying team8_pkg/target_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg
+[4.849s] copying team8_pkg/lane_detection_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg
+[4.850s] copying team8_pkg/mraysu_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg
+[4.850s] copying team8_pkg/depth_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg
+[4.851s] running install
+[4.854s] running install_lib
+[4.858s] creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg
+[4.859s] copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/__init__.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg
+[4.859s] copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/lane_guidance_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg
+[4.859s] copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/target_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg
+[4.860s] copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/lane_detection_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg
+[4.860s] copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/mraysu_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg
+[4.861s] copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/depth_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg
+[4.863s] byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/__init__.py to __init__.cpython-38.pyc
+[4.868s] byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/lane_guidance_node.py to lane_guidance_node.cpython-38.pyc
+[4.872s] byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/target_node.py to target_node.cpython-38.pyc
+[4.874s] byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/lane_detection_node.py to lane_detection_node.cpython-38.pyc
+[4.880s] byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/mraysu_node.py to mraysu_node.cpython-38.pyc
+[4.894s] byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/depth_node.py to depth_node.cpython-38.pyc
+[4.896s] running install_data
+[4.899s] creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/ament_index
+[4.899s] creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/ament_index/resource_index
+[4.899s] creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/ament_index/resource_index/packages
+[4.900s] copying resource/team8_pkg -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/ament_index/resource_index/packages
+[4.900s] copying package.xml -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg
+[4.901s] creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/launch
+[4.901s] copying launch/team8_pkg.launch.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/launch
+[4.901s] copying launch/camera_nav_calibration.launch.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/launch
+[4.902s] copying launch/camera_nav.launch.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/launch
+[4.902s] running install_egg_info
+[4.910s] Copying ../build/team8_pkg/team8_pkg.egg-info to /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg-0.0.0-py3.8.egg-info
+[4.913s] running install_scripts
+[4.981s] Installing depth_node script to /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/team8_pkg
+[4.982s] Installing target_node script to /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/team8_pkg
+[4.983s] writing list of installed files to '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/install.log'
+[5.081s] Invoked command in '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/team8_pkg' returned '0': PYTHONPATH=/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/team8_pkg build --build-base /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build install --prefix /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg --record /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/install.log --single-version-externally-managed

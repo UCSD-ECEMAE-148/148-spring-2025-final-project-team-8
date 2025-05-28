@@ -1,0 +1,4 @@
+[console_scripts]
+depth_node = team8_pkg.depth_node:main
+target_node = team8_pkg.target_node:main
+

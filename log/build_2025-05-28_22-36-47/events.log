@@ -1,0 +1,110 @@
+[0.000000] (-) TimerEvent: {}
+[0.000648] (team8_pkg) JobQueued: {'identifier': 'team8_pkg', 'dependencies': OrderedDict()}
+[0.001981] (team8_pkg) JobStarted: {'identifier': 'team8_pkg'}
+[0.099199] (-) TimerEvent: {}
+[0.199979] (-) TimerEvent: {}
+[0.300730] (-) TimerEvent: {}
+[0.401307] (-) TimerEvent: {}
+[0.501985] (-) TimerEvent: {}
+[0.602814] (-) TimerEvent: {}
+[0.703391] (-) TimerEvent: {}
+[0.803972] (-) TimerEvent: {}
+[0.904599] (-) TimerEvent: {}
+[1.005165] (-) TimerEvent: {}
+[1.105759] (-) TimerEvent: {}
+[1.206354] (-) TimerEvent: {}
+[1.307972] (-) TimerEvent: {}
+[1.408691] (-) TimerEvent: {}
+[1.509460] (-) TimerEvent: {}
+[1.610038] (-) TimerEvent: {}
+[1.710612] (-) TimerEvent: {}
+[1.811206] (-) TimerEvent: {}
+[1.911790] (-) TimerEvent: {}
+[2.012370] (-) TimerEvent: {}
+[2.112947] (-) TimerEvent: {}
+[2.213500] (-) TimerEvent: {}
+[2.314076] (-) TimerEvent: {}
+[2.414668] (-) TimerEvent: {}
+[2.515259] (-) TimerEvent: {}
+[2.615848] (-) TimerEvent: {}
+[2.716492] (-) TimerEvent: {}
+[2.817092] (-) TimerEvent: {}
+[2.917674] (-) TimerEvent: {}
+[3.018248] (-) TimerEvent: {}
+[3.118841] (-) TimerEvent: {}
+[3.219444] (-) TimerEvent: {}
+[3.320052] (-) TimerEvent: {}
+[3.420740] (-) TimerEvent: {}
+[3.516021] (team8_pkg) Command: {'cmd': ['/usr/bin/python3', 'setup.py', 'egg_info', '--egg-base', '../build/team8_pkg', 'build', '--build-base', '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build', 'install', '--prefix', '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg', '--record', '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/install.log', '--single-version-externally-managed'], 'cwd': '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/team8_pkg', 'env': {'HOSTNAME': 'ucsdrobocar-148-08', 'SHLVL': '1', 'LD_LIBRARY_PATH': '/home/projects/sensor2_ws/src/vesc/install/vesc_driver/lib:/home/projects/sensor2_ws/src/vesc/install/vesc_ackermann/lib:/home/projects/sensor2_ws/src/vesc/install/vesc_msgs/lib:/home/projects/sensor2_ws/src/vesc/install/teleop_tools_msgs/lib:/opt/ros/foxy/opt/yaml_cpp_vendor/lib:/opt/ros/foxy/opt/rviz_ogre_vendor/lib:/opt/ros/foxy/lib/aarch64-linux-gnu:/opt/ros/foxy/lib', 'HOME': '/root', 'OLDPWD': '/home/projects/ros2_ws', 'ROS_PYTHON_VERSION': '3', 'COLCON_PREFIX_PATH': '/home/projects/rosboard_ws/install:/home/projects/sensor2_ws/src/lidars/ld06/ros2/install:/home/projects/sensor2_ws/src/vesc/install:/home/projects/ros2_ws/install:/home/projects/sensor2_ws/src/imu/artemis_openlog/install:/home/projects/sensor2_ws/src/cameras/oakd/install', 'ROS_DISTRO': 'foxy', '_': '/usr/bin/colcon', 'ROS_VERSION': '2', 'TERM': 'xterm', 'ROS_LOCALHOST_ONLY': '0', 'PATH': '/opt/ros/foxy/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin', 'DISPLAY': 'localhost:10.0', 'LANG': 'C.UTF-8', 'ROS1_DISTRO': 'noetic', 'LS_COLORS': 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:', 'ROS2_DISTRO': 'foxy', 'ROS_DOMAIN_ID': '96', 'AMENT_PREFIX_PATH': '/home/projects/sensor2_ws/src/cameras/oakd/install/multi_cam:/home/projects/ros2_ws/install/ucsd_robocar_sensor2_pkg:/home/projects/ros2_ws/install/ucsd_robocar_path2_pkg:/home/projects/ros2_ws/install/ucsd_robocar_nav2_pkg:/home/projects/ros2_ws/install/ucsd_robocar_lane_detection2_pkg:/home/projects/ros2_ws/install/ucsd_robocar_control2_pkg:/home/projects/ros2_ws/install/ucsd_robocar_basics2_pkg:/home/projects/ros2_ws/install/ucsd_robocar_actuator2_pkg:/home/projects/ros2_ws/install/team8_pkg:/home/projects/rosboard_ws/install/rosboard:/home/projects/sensor2_ws/src/lidars/ld06/ros2/install/ldlidar:/home/projects/sensor2_ws/src/vesc/install/vesc:/home/projects/sensor2_ws/src/vesc/install/vesc_driver:/home/projects/sensor2_ws/src/vesc/install/vesc_ackermann:/home/projects/sensor2_ws/src/vesc/install/vesc_msgs:/home/projects/sensor2_ws/src/vesc/install/teleop_tools:/home/projects/sensor2_ws/src/vesc/install/joy_teleop:/home/projects/sensor2_ws/src/vesc/install/teleop_tools_msgs:/home/projects/sensor2_ws/src/vesc/install/mouse_teleop:/home/projects/sensor2_ws/src/vesc/install/key_teleop:/home/projects/sensor2_ws/src/vesc/install/ackermann_mux:/home/projects/sensor2_ws/src/imu/artemis_openlog/install/razor_imu_9dof:/opt/ros/foxy', 'PWD': '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg', 'LC_ALL': 'C.UTF-8', 'PYTHONPATH': '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages:/home/projects/sensor2_ws/src/cameras/oakd/install/multi_cam/lib/python3.8/site-packages:/home/projects/ros2_ws/install/ucsd_robocar_sensor2_pkg/lib/python3.8/site-packages:/home/projects/ros2_ws/install/ucsd_robocar_path2_pkg/lib/python3.8/site-packages:/home/projects/ros2_ws/install/ucsd_robocar_nav2_pkg/lib/python3.8/site-packages:/home/projects/ros2_ws/install/ucsd_robocar_lane_detection2_pkg/lib/python3.8/site-packages:/home/projects/ros2_ws/install/ucsd_robocar_control2_pkg/lib/python3.8/site-packages:/home/projects/ros2_ws/install/ucsd_robocar_basics2_pkg/lib/python3.8/site-packages:/home/projects/ros2_ws/install/ucsd_robocar_actuator2_pkg/lib/python3.8/site-packages:/home/projects/ros2_ws/install/team8_pkg/lib/python3.8/site-packages:/home/projects/rosboard_ws/install/rosboard/lib/python3.8/site-packages:/home/projects/sensor2_ws/src/vesc/install/vesc_msgs/lib/python3.8/site-packages:/home/projects/sensor2_ws/src/vesc/install/joy_teleop/lib/python3.8/site-packages:/home/projects/sensor2_ws/src/vesc/install/teleop_tools_msgs/lib/python3.8/site-packages:/home/projects/sensor2_ws/src/vesc/install/mouse_teleop/lib/python3.8/site-packages:/home/projects/sensor2_ws/src/vesc/install/key_teleop/lib/python3.8/site-packages:/home/projects/sensor2_ws/src/imu/artemis_openlog/install/razor_imu_9dof/lib/python3.8/site-packages:/opt/ros/foxy/lib/python3.8/site-packages', 'COLCON': '1', 'CMAKE_PREFIX_PATH': '/home/projects/sensor2_ws/src/lidars/ld06/ros2/install/ldlidar:/home/projects/sensor2_ws/src/vesc/install/vesc:/home/projects/sensor2_ws/src/vesc/install/vesc_driver:/home/projects/sensor2_ws/src/vesc/install/vesc_ackermann:/home/projects/sensor2_ws/src/vesc/install/vesc_msgs:/home/projects/sensor2_ws/src/vesc/install/teleop_tools:/home/projects/sensor2_ws/src/vesc/install/teleop_tools_msgs:/home/projects/sensor2_ws/src/vesc/install/ackermann_mux'}, 'shell': False}
+[3.520880] (-) TimerEvent: {}
+[3.621639] (-) TimerEvent: {}
+[3.722404] (-) TimerEvent: {}
+[3.822990] (-) TimerEvent: {}
+[3.923620] (-) TimerEvent: {}
+[4.024195] (-) TimerEvent: {}
+[4.124827] (-) TimerEvent: {}
+[4.225406] (-) TimerEvent: {}
+[4.325974] (-) TimerEvent: {}
+[4.426528] (-) TimerEvent: {}
+[4.527117] (-) TimerEvent: {}
+[4.627713] (-) TimerEvent: {}
+[4.674212] (team8_pkg) StdoutLine: {'line': b'running egg_info\n'}
+[4.676247] (team8_pkg) StdoutLine: {'line': b'creating ../build/team8_pkg/team8_pkg.egg-info\n'}
+[4.677250] (team8_pkg) StdoutLine: {'line': b'writing ../build/team8_pkg/team8_pkg.egg-info/PKG-INFO\n'}
+[4.678081] (team8_pkg) StdoutLine: {'line': b'writing dependency_links to ../build/team8_pkg/team8_pkg.egg-info/dependency_links.txt\n'}
+[4.678566] (team8_pkg) StdoutLine: {'line': b'writing entry points to ../build/team8_pkg/team8_pkg.egg-info/entry_points.txt\n'}
+[4.678985] (team8_pkg) StdoutLine: {'line': b'writing requirements to ../build/team8_pkg/team8_pkg.egg-info/requires.txt\n'}
+[4.679401] (team8_pkg) StdoutLine: {'line': b'writing top-level names to ../build/team8_pkg/team8_pkg.egg-info/top_level.txt\n'}
+[4.689774] (team8_pkg) StdoutLine: {'line': b"writing manifest file '../build/team8_pkg/team8_pkg.egg-info/SOURCES.txt'\n"}
+[4.727848] (-) TimerEvent: {}
+[4.828470] (-) TimerEvent: {}
+[4.843726] (team8_pkg) StdoutLine: {'line': b"reading manifest file '../build/team8_pkg/team8_pkg.egg-info/SOURCES.txt'\n"}
+[4.847206] (team8_pkg) StdoutLine: {'line': b"writing manifest file '../build/team8_pkg/team8_pkg.egg-info/SOURCES.txt'\n"}
+[4.847853] (team8_pkg) StdoutLine: {'line': b'running build\n'}
+[4.848236] (team8_pkg) StdoutLine: {'line': b'running build_py\n'}
+[4.849059] (team8_pkg) StdoutLine: {'line': b'creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build\n'}
+[4.849530] (team8_pkg) StdoutLine: {'line': b'creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib\n'}
+[4.849973] (team8_pkg) StdoutLine: {'line': b'creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg\n'}
+[4.850425] (team8_pkg) StdoutLine: {'line': b'copying team8_pkg/__init__.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg\n'}
+[4.850846] (team8_pkg) StdoutLine: {'line': b'copying team8_pkg/lane_guidance_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg\n'}
+[4.851255] (team8_pkg) StdoutLine: {'line': b'copying team8_pkg/target_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg\n'}
+[4.851642] (team8_pkg) StdoutLine: {'line': b'copying team8_pkg/lane_detection_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg\n'}
+[4.851993] (team8_pkg) StdoutLine: {'line': b'copying team8_pkg/mraysu_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg\n'}
+[4.852410] (team8_pkg) StdoutLine: {'line': b'copying team8_pkg/depth_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg\n'}
+[4.852861] (team8_pkg) StdoutLine: {'line': b'running install\n'}
+[4.856305] (team8_pkg) StdoutLine: {'line': b'running install_lib\n'}
+[4.860136] (team8_pkg) StdoutLine: {'line': b'creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg\n'}
+[4.860725] (team8_pkg) StdoutLine: {'line': b'copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/__init__.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg\n'}
+[4.861162] (team8_pkg) StdoutLine: {'line': b'copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/lane_guidance_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg\n'}
+[4.861561] (team8_pkg) StdoutLine: {'line': b'copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/target_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg\n'}
+[4.861967] (team8_pkg) StdoutLine: {'line': b'copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/lane_detection_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg\n'}
+[4.862396] (team8_pkg) StdoutLine: {'line': b'copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/mraysu_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg\n'}
+[4.862896] (team8_pkg) StdoutLine: {'line': b'copying /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build/lib/team8_pkg/depth_node.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg\n'}
+[4.865593] (team8_pkg) StdoutLine: {'line': b'byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/__init__.py to __init__.cpython-38.pyc\n'}
+[4.870454] (team8_pkg) StdoutLine: {'line': b'byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/lane_guidance_node.py to lane_guidance_node.cpython-38.pyc\n'}
+[4.874403] (team8_pkg) StdoutLine: {'line': b'byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/target_node.py to target_node.cpython-38.pyc\n'}
+[4.875705] (team8_pkg) StdoutLine: {'line': b'byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/lane_detection_node.py to lane_detection_node.cpython-38.pyc\n'}
+[4.882245] (team8_pkg) StdoutLine: {'line': b'byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/mraysu_node.py to mraysu_node.cpython-38.pyc\n'}
+[4.895800] (team8_pkg) StdoutLine: {'line': b'byte-compiling /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg/depth_node.py to depth_node.cpython-38.pyc\n'}
+[4.898227] (team8_pkg) StdoutLine: {'line': b'running install_data\n'}
+[4.900621] (team8_pkg) StdoutLine: {'line': b'creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/ament_index\n'}
+[4.901166] (team8_pkg) StdoutLine: {'line': b'creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/ament_index/resource_index\n'}
+[4.901601] (team8_pkg) StdoutLine: {'line': b'creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/ament_index/resource_index/packages\n'}
+[4.902002] (team8_pkg) StdoutLine: {'line': b'copying resource/team8_pkg -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/ament_index/resource_index/packages\n'}
+[4.902443] (team8_pkg) StdoutLine: {'line': b'copying package.xml -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg\n'}
+[4.902831] (team8_pkg) StdoutLine: {'line': b'creating /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/launch\n'}
+[4.903214] (team8_pkg) StdoutLine: {'line': b'copying launch/team8_pkg.launch.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/launch\n'}
+[4.903604] (team8_pkg) StdoutLine: {'line': b'copying launch/camera_nav_calibration.launch.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/launch\n'}
+[4.903939] (team8_pkg) StdoutLine: {'line': b'copying launch/camera_nav.launch.py -> /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/launch\n'}
+[4.904311] (team8_pkg) StdoutLine: {'line': b'running install_egg_info\n'}
+[4.911960] (team8_pkg) StdoutLine: {'line': b'Copying ../build/team8_pkg/team8_pkg.egg-info to /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages/team8_pkg-0.0.0-py3.8.egg-info\n'}
+[4.915600] (team8_pkg) StdoutLine: {'line': b'running install_scripts\n'}
+[4.928605] (-) TimerEvent: {}
+[4.983177] (team8_pkg) StdoutLine: {'line': b'Installing depth_node script to /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/team8_pkg\n'}
+[4.984124] (team8_pkg) StdoutLine: {'line': b'Installing target_node script to /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/team8_pkg\n'}
+[4.985653] (team8_pkg) StdoutLine: {'line': b"writing list of installed files to '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/install.log'\n"}
+[5.028771] (-) TimerEvent: {}
+[5.082644] (team8_pkg) CommandEnded: {'returncode': 0}
+[5.153183] (-) TimerEvent: {}
+[5.187076] (team8_pkg) JobEnded: {'identifier': 'team8_pkg', 'rc': 0}
+[5.189509] (-) EventReactorShutdown: {}

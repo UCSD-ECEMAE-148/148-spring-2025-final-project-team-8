@@ -1,0 +1,109 @@
+[0.776s] DEBUG:colcon:Command line arguments: ['/usr/bin/colcon', 'build', '--packages-select', 'team8_pkg']
+[0.776s] DEBUG:colcon:Parsed command line arguments: Namespace(allow_overriding=[], ament_cmake_args=None, base_paths=['.'], build_base='build', catkin_cmake_args=None, catkin_skip_building_tests=False, cmake_args=None, cmake_clean_cache=False, cmake_clean_first=False, cmake_force_configure=False, cmake_target=None, cmake_target_skip_unavailable=False, continue_on_error=False, event_handlers=None, executor='parallel', ignore_user_meta=False, install_base='install', log_base=None, log_level=None, main=<bound method BuildVerb.main of <colcon_core.verb.build.BuildVerb object at 0x7facd39e20>>, merge_install=False, metas=['./colcon.meta'], mixin=None, mixin_files=None, mixin_verb=('build',), packages_above=None, packages_above_and_dependencies=None, packages_above_depth=None, packages_end=None, packages_ignore=None, packages_ignore_regex=None, packages_select=['team8_pkg'], packages_select_build_failed=False, packages_select_by_dep=None, packages_select_regex=None, packages_select_test_failures=False, packages_skip=None, packages_skip_build_finished=False, packages_skip_by_dep=None, packages_skip_regex=None, packages_skip_test_passed=False, packages_skip_up_to=None, packages_start=None, packages_up_to=None, packages_up_to_regex=None, parallel_workers=4, paths=None, symlink_install=False, test_result_base=None, verb_extension=<colcon_core.verb.build.BuildVerb object at 0x7facd39e20>, verb_name='build', verb_parser=<colcon_mixin.mixin.mixin_argument.MixinArgumentDecorator object at 0x7facd44430>)
+[0.799s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) check parameters
+[0.802s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/Gazebo.meta'
+[0.805s] INFO:colcon.colcon_metadata.package_discovery.colcon_meta:Using configuration from '/root/.colcon/metadata/default/fastrtps.meta'
+[0.805s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) check parameters
+[0.805s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) check parameters
+[0.805s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) check parameters
+[0.805s] Level 1:colcon.colcon_core.package_discovery:discover_packages(colcon_meta) discover
+[0.806s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) discover
+[0.806s] INFO:colcon.colcon_core.package_discovery:Crawling recursively for packages in '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8'
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ignore', 'ignore_ament_install']
+[0.806s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ignore_ament_install'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_pkg']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_pkg'
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['colcon_meta']
+[0.807s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'colcon_meta'
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['ros']
+[0.808s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'ros'
+[0.857s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['cmake', 'python']
+[0.857s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'cmake'
+[0.857s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python'
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extensions ['python_setup_py']
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(.) by extension 'python_setup_py'
+[0.858s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extensions ['ignore', 'ignore_ament_install']
+[0.859s] Level 1:colcon.colcon_core.package_identification:_identify(build) by extension 'ignore'
+[0.859s] Level 1:colcon.colcon_core.package_identification:_identify(build) ignored
+[0.859s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extensions ['ignore', 'ignore_ament_install']
+[0.859s] Level 1:colcon.colcon_core.package_identification:_identify(install) by extension 'ignore'
+[0.860s] Level 1:colcon.colcon_core.package_identification:_identify(install) ignored
+[0.860s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extensions ['ignore', 'ignore_ament_install']
+[0.860s] Level 1:colcon.colcon_core.package_identification:_identify(log) by extension 'ignore'
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(log) ignored
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extensions ['ignore', 'ignore_ament_install']
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extension 'ignore'
+[0.861s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extension 'ignore_ament_install'
+[0.862s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extensions ['colcon_pkg']
+[0.862s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extension 'colcon_pkg'
+[0.862s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extensions ['colcon_meta']
+[0.862s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extension 'colcon_meta'
+[0.862s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extensions ['ros']
+[0.862s] Level 1:colcon.colcon_core.package_identification:_identify(team8_pkg) by extension 'ros'
+[0.873s] DEBUG:colcon.colcon_core.package_identification:Package 'team8_pkg' with type 'ros.ament_python' and name 'team8_pkg'
+[0.873s] Level 1:colcon.colcon_core.package_discovery:discover_packages(recursive) using defaults
+[0.873s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) discover
+[0.873s] Level 1:colcon.colcon_core.package_discovery:discover_packages(ignore) using defaults
+[0.873s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) discover
+[0.874s] Level 1:colcon.colcon_core.package_discovery:discover_packages(path) using defaults
+[0.953s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'cmake_args' from command line to 'None'
+[0.954s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'cmake_target' from command line to 'None'
+[0.954s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'cmake_target_skip_unavailable' from command line to 'False'
+[0.954s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'cmake_clean_cache' from command line to 'False'
+[0.954s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'cmake_clean_first' from command line to 'False'
+[0.954s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'cmake_force_configure' from command line to 'False'
+[0.954s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'ament_cmake_args' from command line to 'None'
+[0.954s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'catkin_cmake_args' from command line to 'None'
+[0.954s] Level 5:colcon.colcon_core.verb:set package 'team8_pkg' build argument 'catkin_skip_building_tests' from command line to 'False'
+[0.955s] DEBUG:colcon.colcon_core.verb:Building package 'team8_pkg' with the following arguments: {'ament_cmake_args': None, 'build_base': '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg', 'catkin_cmake_args': None, 'catkin_skip_building_tests': False, 'cmake_args': None, 'cmake_clean_cache': False, 'cmake_clean_first': False, 'cmake_force_configure': False, 'cmake_target': None, 'cmake_target_skip_unavailable': False, 'install_base': '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg', 'merge_install': False, 'path': '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/team8_pkg', 'symlink_install': False, 'test_result_base': None}
+[0.990s] WARNING:colcon.colcon_core.verb:Some selected packages are already built in one or more underlay workspaces:
+	'team8_pkg' is in: /home/projects/ros2_ws/install/team8_pkg
+If a package in a merged underlay workspace is overridden and it installs headers, then all packages in the overlay must sort their include directories by workspace order. Failure to do so may result in build failures or undefined behavior at run time.
+If the overridden package is used by another package in any underlay, then the overriding package in the overlay must be API and ABI compatible or undefined behavior at run time may occur.
+
+If you understand the risks and want to override a package anyways, add the following to the command line:
+	--allow-overriding team8_pkg
+
+This may be promoted to an error in a future release of colcon-core.
+[0.993s] INFO:colcon.colcon_core.executor:Executing jobs using 'parallel' executor
+[1.002s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete
+[1.003s] INFO:colcon.colcon_ros.task.ament_python.build:Building ROS package in '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/team8_pkg' with build type 'ament_python'
+[1.003s] Level 1:colcon.colcon_core.shell:create_environment_hook('team8_pkg', 'ament_prefix_path')
+[1.019s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_core.shell.bat': Not used on non-Windows systems
+[1.020s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/hook/ament_prefix_path.ps1'
+[1.025s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/hook/ament_prefix_path.dsv'
+[1.027s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/hook/ament_prefix_path.sh'
+[1.032s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[1.032s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[2.282s] INFO:colcon.colcon_core.task.python.build:Building Python package in '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/team8_pkg'
+[2.285s] INFO:colcon.colcon_core.shell:Skip shell extension 'powershell' for command environment: Not usable outside of PowerShell
+[2.285s] DEBUG:colcon.colcon_core.shell:Skip shell extension 'dsv' for command environment
+[4.520s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoking command in '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/team8_pkg': PYTHONPATH=/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/team8_pkg build --build-base /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build install --prefix /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg --record /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/install.log --single-version-externally-managed
+[6.085s] DEBUG:colcon.colcon_core.event_handler.log_command:Invoked command in '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/team8_pkg' returned '0': PYTHONPATH=/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py egg_info --egg-base ../build/team8_pkg build --build-base /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/build install --prefix /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg --record /home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/build/team8_pkg/install.log --single-version-externally-managed
+[6.108s] Level 1:colcon.colcon_core.environment:checking '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg' for CMake module files
+[6.156s] Level 1:colcon.colcon_core.environment:checking '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg' for CMake config files
+[6.159s] Level 1:colcon.colcon_core.environment:checking '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib'
+[6.160s] Level 1:colcon.colcon_core.environment:checking '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/bin'
+[6.160s] Level 1:colcon.colcon_core.environment:checking '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/pkgconfig/team8_pkg.pc'
+[6.160s] Level 1:colcon.colcon_core.environment:checking '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/lib/python3.8/site-packages'
+[6.161s] Level 1:colcon.colcon_core.shell:create_environment_hook('team8_pkg', 'pythonpath')
+[6.163s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/hook/pythonpath.ps1'
+[6.165s] INFO:colcon.colcon_core.shell:Creating environment descriptor '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/hook/pythonpath.dsv'
+[6.166s] INFO:colcon.colcon_core.shell:Creating environment hook '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/hook/pythonpath.sh'
+[6.167s] Level 1:colcon.colcon_core.environment:create_environment_scripts_only(team8_pkg)
+[6.170s] INFO:colcon.colcon_core.shell:Creating package script '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/package.ps1'
+[6.174s] INFO:colcon.colcon_core.shell:Creating package descriptor '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/package.dsv'
+[6.177s] INFO:colcon.colcon_core.shell:Creating package script '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/package.sh'
+[6.180s] INFO:colcon.colcon_core.shell:Creating package script '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/package.bash'
+[6.183s] INFO:colcon.colcon_core.shell:Creating package script '/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/team8_pkg/package.zsh'
+[6.186s] Level 1:colcon.colcon_core.environment:create_file_with_runtime_dependencies(/home/projects/ros2_ws/src/148-spring-2025-final-project-team-8/install/team8_pkg/share/colcon-core/packages/team8_pkg)
+[6.188s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:closing loop
+[6.189s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:loop closed
+[6.189s] DEBUG:colcon.colcon_parallel_executor.executor.parallel:run_until_complete finished with '0'
+[6.189s] DEBUG:colcon.colcon_core.event_reactor:joining thread
+[6.214s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.notify_send': Could not find 'notify-send'
+[6.214s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.terminal_notifier': Not used on non-Darwin systems
+[6.214s] INFO:colcon.colcon_core.plugin_system:Skipping extension 'colcon_notification.desktop_notification.win32': Not used on non-Windows systems
+[6.214s] INFO:colcon.colcon_notification.desktop_notification:Sending desktop notification using 'notify2'
+[12.242s] DEBUG:colcon.colcon_notification.desktop_notification.notify2:Failed to initialize notify2: org.freedesktop.DBus.Error.Spawn.ExecFailed: /usr/bin/dbus-launch terminated abnormally without any error message
