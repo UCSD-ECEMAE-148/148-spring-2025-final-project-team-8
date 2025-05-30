@@ -33,14 +33,13 @@ class Depth(Node):
     pipeline = dai.Pipeline()
 
     #color camera pipeline
-    colorCam = pipeline.create(dai.node.ColorCamera)
-    colorCam.setPreviewSize(320, 240)
-    colorCam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_720_P)
-    colorCam.setColorOrder(dai.ColorCameraProperties.ColorOrder.RGB)
-    colorCam.setBoardSocket(dai.CameraBoardSocket.RGB)
-    colorCam.setInterleaved(False)
-    xout_rgb = pipeline.create(dai.node.XLinkOut)
-    xout_rgb.setStreamName("rgb")
+    #colorCam = pipeline.create(dai.node.ColorCamera)
+    #colorCam.setPreviewSize(320, 240)
+    #colorCam.setColorOrder(dai.ColorCameraProperties.ColorOrder.RGB)
+    #colorCam.setBoardSocket(dai.CameraBoardSocket.RGB)
+    #colorCam.setInterleaved(False)
+    #xout_rgb = pipeline.create(dai.node.XLinkOut)
+    #xout_rgb.setStreamName("rgb")
 
     # Define sources and outputs
     monoLeft = pipeline.create(dai.node.MonoCamera)
@@ -51,9 +50,9 @@ class Depth(Node):
     xout_depth.setStreamName("disparity")
 
     # Properties
-    monoLeft.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
+    monoLeft.setResolution(dai.MonoCameraProperties.SensorResolution.THE_200_P)
     monoLeft.setBoardSocket(dai.CameraBoardSocket.LEFT)
-    monoRight.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
+    monoRight.setResolution(dai.MonoCameraProperties.SensorResolution.THE_200_P)
     monoRight.setBoardSocket(dai.CameraBoardSocket.RIGHT)
 
     # Create a node that will produce the depth map (using disparity output as it's easier to visualize depth this way)
@@ -68,13 +67,13 @@ class Depth(Node):
     monoLeft.out.link(depth.left)
     monoRight.out.link(depth.right)
     depth.disparity.link(xout_depth.input)
-    colorCam.preview.link(xout_rgb.input)
+    #colorCam.preview.link(xout_rgb.input)
 
     # Connect to device and start pipeline
     self.device = dai.Device(pipeline)
     # Output queue will be used to get the disparity frames from the outputs defined above
     self.queue_disp = self.device.getOutputQueue(name="disparity", maxSize=1, blocking=False)
-    self.queue_rgb = self.device.getOutputQueue(name="rgb", maxSize=1, blocking=False)
+    #self.queue_rgb = self.device.getOutputQueue(name="rgb", maxSize=1, blocking=False)
     self.maxDisparity = depth.initialConfig.getMaxDisparity()
 
   def publish_depth(self):
