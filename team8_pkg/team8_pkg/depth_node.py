@@ -36,6 +36,7 @@ class Depth(Node):
     colorCam = pipeline.create(dai.node.ColorCamera)
     colorCam.setPreviewSize(640, 360)
     colorCam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_720_P)
+    colorCam.setColorOrder(dai.ColorCameraProperties.ColorOrder.RGB)
     colorCam.setBoardSocket(dai.CameraBoardSocket.RGB)
     colorCam.setInterleaved(False)
     xout_rgb = pipeline.create(dai.node.XLinkOut)
@@ -88,9 +89,9 @@ class Depth(Node):
     self.get_logger().info("wrote to object")
 
     # RGB
-    inRgb = self.queue_rgb.get()
-    rgb_frame = inRgb.getCvFrame()
-    self.data.rgb = self.bridge.cv2_to_imgmsg(rgb_frame, encoding="bgr8")
+    #inRgb = self.queue_rgb.get()
+    #rgb_frame = inRgb.getCvFrame()
+    #self.data.rgb = self.bridge.cv2_to_imgmsg(rgb_frame, encoding="bgr8")
 
     self.depth_publisher.publish(self.data)
 
