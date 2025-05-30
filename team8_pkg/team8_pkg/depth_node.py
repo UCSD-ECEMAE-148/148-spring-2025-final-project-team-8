@@ -73,8 +73,8 @@ class Depth(Node):
     # Connect to device and start pipeline
     self.device = dai.Device(pipeline)
     # Output queue will be used to get the disparity frames from the outputs defined above
-    self.queue_disp = self.device.getOutputQueue(name="disparity", maxSize=4, blocking=False)
-    self.queue_rgb = self.device.getOutputQueue(name="rgb", maxSize=4, blocking=False)
+    self.queue_disp = self.device.getOutputQueue(name="disparity", maxSize=1, blocking=False)
+    self.queue_rgb = self.device.getOutputQueue(name="rgb", maxSize=1, blocking=False)
     self.maxDisparity = depth.initialConfig.getMaxDisparity()
 
   def publish_depth(self):
