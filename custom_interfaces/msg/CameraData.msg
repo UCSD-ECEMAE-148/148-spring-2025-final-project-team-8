@@ -1,2 +1,2 @@
-sensor_msgs/msg/Image rgb
-sensor_msgs/msg/Image depth
+sensor_msgs/Image rgb
+sensor_msgs/Image depth
