@@ -11,7 +11,7 @@ import numpy as np
 NODE_NAME = "depth_node"
 DEPTH_TOPIC = "/disparities"
 FREQUENCY = 0.05
-DISPLAY_DEPTH = True
+DISPLAY_DEPTH = False
 
 class Depth(Node):
   def __init__(self):
@@ -19,11 +19,13 @@ class Depth(Node):
     self.get_logger().info("initialized")
     self.depth_publisher = self.create_publisher(CameraData, DEPTH_TOPIC, 10)
     self.bridge = CvBridge()
+    self.data = CameraData()
 
     self.create_pipeline()
     self.get_logger().info("pipeline created")
+
     self.timer = self.create_timer(0.05, self.publish_depth)
-    self.data = CameraData()
+    self.get_logger().info("begin publishing")
     if DISPLAY_DEPTH:
       self.data_viewer = self.create_subscription(CameraData, DEPTH_TOPIC, self.display_data, 10)  
   
