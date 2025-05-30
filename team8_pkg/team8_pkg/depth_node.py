@@ -32,7 +32,7 @@ class Depth(Node):
     colorCam = pipeline.create(dai.node.ColorCamera)
     colorCam.setInterleaved(False)
     colorCam.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
-    colorCam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_400_P)
+    colorCam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_720_P)
     xout_rgb = pipeline.create(dai.node.XLinkOut)
     xout_rgb.setStreamName("rgb")
 
