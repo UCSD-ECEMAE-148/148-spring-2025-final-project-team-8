@@ -38,6 +38,10 @@ endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/CameraData.msg"
+  DEPENDENCIES sensor_msgs std_msgs
 ) 
+
+# Export type support runtime
+ament_export_dependencies(rosidl_default_runtime)
 
 ament_package()
