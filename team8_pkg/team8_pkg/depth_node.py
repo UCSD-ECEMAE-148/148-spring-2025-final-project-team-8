@@ -78,9 +78,12 @@ class Depth(Node):
   def publish_depth(self):
     #depth
     inDisparity = self.queue_disp.get()
+    self.get_logger().info("got data")
     disp = inDisparity.getFrame()
+    self.get_logger().info("got frame")
     disp = (disp * (255 / self.maxDisparity)).astype(np.uint8)
     self.data.disparity = self.bridge.cv2_to_imgmsg(disp, encoding="mono8")
+    self.get_logger().info("wrote to object")
 
     # RGB
     #inRgb = self.queue_rgb.get()
