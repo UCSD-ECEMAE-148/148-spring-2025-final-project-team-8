@@ -33,12 +33,12 @@ class Depth(Node):
     pipeline = dai.Pipeline()
 
     #color camera pipeline
-    #colorCam = pipeline.create(dai.node.ColorCamera)
-    #colorCam.setInterleaved(False)
-    #colorCam.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
-    #colorCam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_720_P)
-    #xout_rgb = pipeline.create(dai.node.XLinkOut)
-    #xout_rgb.setStreamName("rgb")
+    colorCam = pipeline.create(dai.node.ColorCamera)
+    colorCam.setInterleaved(False)
+    colorCam.setColorOrder(dai.ColorCameraProperties.ColorOrder.BGR)
+    colorCam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_720_P)
+    xout_rgb = pipeline.create(dai.node.XLinkOut)
+    xout_rgb.setStreamName("rgb")
 
     # Define sources and outputs
     monoLeft = pipeline.create(dai.node.MonoCamera)
@@ -66,13 +66,13 @@ class Depth(Node):
     monoLeft.out.link(depth.left)
     monoRight.out.link(depth.right)
     depth.disparity.link(xout_depth.input)
-    #colorCam.preview.link(xout_rgb.input)
+    colorCam.preview.link(xout_rgb.input)
 
     # Connect to device and start pipeline
     self.device = dai.Device(pipeline)
     # Output queue will be used to get the disparity frames from the outputs defined above
     self.queue_disp = self.device.getOutputQueue(name="disparity", maxSize=4, blocking=False)
-    #self.queue_rgb = self.device.getOutputQueue(name="rgb", maxSize=4, blocking=False)
+    self.queue_rgb = self.device.getOutputQueue(name="rgb", maxSize=4, blocking=False)
     self.maxDisparity = depth.initialConfig.getMaxDisparity()
 
   def publish_depth(self):
@@ -87,9 +87,9 @@ class Depth(Node):
     self.get_logger().info("wrote to object")
 
     # RGB
-    #inRgb = self.queue_rgb.get()
-    #rgb_frame = inRgb.getCvFrame()
-    #self.data.rgb = self.bridge.cv2_to_imgmsg(rgb_frame, encoding="bgr8")
+    inRgb = self.queue_rgb.get()
+    rgb_frame = inRgb.getCvFrame()
+    self.data.rgb = self.bridge.cv2_to_imgmsg(rgb_frame, encoding="bgr8")
 
     self.depth_publisher.publish(self.data)
 
