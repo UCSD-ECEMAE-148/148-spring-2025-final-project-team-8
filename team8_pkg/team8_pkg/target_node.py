@@ -1,6 +1,7 @@
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
+import base64
 
 import requests
 import os
@@ -21,21 +22,21 @@ class Target(Node):
 
     
     # Load image and convert to base64
-    #with open('your_image.jpg', 'rb') as img_file:
-    #    image_bytes = img_file.read()
-    #    image_base64 = base64.b64encode(image_bytes).decode('utf-8')
+    with open('your_image.jpg', 'rb') as img_file:
+        image_bytes = img_file.read()
+        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
 
     # Construct the request body
     body = {
         "contents": [
             {
                 "parts": [
-                    #{
-                    #    "inline_data": {
-                    #        "mime_type": "image/jpeg",
-                    #        "data": image_base64
-                    #    }
-                    #},
+                    {
+                        "inline_data": {
+                            "mime_type": "image/jpeg",
+                            "data": image_base64
+                        }
+                    },
                     {
                         "text": data.data
                     }
