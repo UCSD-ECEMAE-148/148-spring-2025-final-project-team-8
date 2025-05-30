@@ -22,7 +22,7 @@ class Target(Node):
 
     
     # Load image and convert to base64
-    with open('your_image.jpg', 'rb') as img_file:
+    with open('picture.jpg', 'rb') as img_file:
         image_bytes = img_file.read()
         image_base64 = base64.b64encode(image_bytes).decode('utf-8')
 
