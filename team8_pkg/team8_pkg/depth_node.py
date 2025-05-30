@@ -76,14 +76,14 @@ class Depth(Node):
     inDisparity = self.queue_disp.get()
     disp = inDisparity.getFrame()
     disp = (disp * (255 / self.maxDisparity)).astype(np.uint8)
-    data.disparity = self.bridge.cv2_to_imgmsg(disp, encoding="mono8")
+    self.data.disparity = self.bridge.cv2_to_imgmsg(disp, encoding="mono8")
 
     # RGB
     inRgb = self.queue_rgb.get()
     rgb_frame = inRgb.getCvFrame()
-    data.rgb = self.bridge.cv2_to_imgmsg(rgb_frame, encoding="bgr8")
+    self.data.rgb = self.bridge.cv2_to_imgmsg(rgb_frame, encoding="bgr8")
 
-    self.depth_publisher.publish(data)
+    self.depth_publisher.publish(self.data)
 
   def display_data(self, data):
     frame = self.bridge.imgmsg_to_cv2(data.disparity, desired_encoding="passthrough")
