@@ -36,7 +36,7 @@ if(BUILD_TESTING)
 endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/Age.msg"
+  "msg/CameraData.msg"
 ) 
 
 ament_package()
