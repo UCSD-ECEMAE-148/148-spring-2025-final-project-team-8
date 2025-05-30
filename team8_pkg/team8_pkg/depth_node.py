@@ -16,10 +16,12 @@ DISPLAY_DEPTH = True
 class Depth(Node):
   def __init__(self):
     super().__init__(NODE_NAME)
+    self.get_logger().info("initialized")
     self.depth_publisher = self.create_publisher(CameraData, DEPTH_TOPIC, 10)
     self.bridge = CvBridge()
 
     self.create_pipeline()
+    self.get_logger().info("pipeline created")
     self.timer = self.create_timer(0.05, self.publish_depth)
     self.data = CameraData()
     if DISPLAY_DEPTH:
