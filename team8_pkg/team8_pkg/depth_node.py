@@ -11,7 +11,7 @@ import numpy as np
 NODE_NAME = "depth_node"
 DEPTH_TOPIC = "/disparities"
 FREQUENCY = 0.05
-DISPLAY_DEPTH = False
+DISPLAY_DEPTH = True
 
 class Depth(Node):
   def __init__(self):
@@ -50,15 +50,15 @@ class Depth(Node):
     xout_depth.setStreamName("disparity")
 
     # Properties
-    monoLeft.setResolution(dai.MonoCameraProperties.SensorResolution.THE_200_P)
+    monoLeft.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
     monoLeft.setBoardSocket(dai.CameraBoardSocket.LEFT)
-    monoRight.setResolution(dai.MonoCameraProperties.SensorResolution.THE_200_P)
+    monoRight.setResolution(dai.MonoCameraProperties.SensorResolution.THE_400_P)
     monoRight.setBoardSocket(dai.CameraBoardSocket.RIGHT)
 
     # Create a node that will produce the depth map (using disparity output as it's easier to visualize depth this way)
     depth.setDefaultProfilePreset(dai.node.StereoDepth.PresetMode.HIGH_DENSITY)
     # Options: MEDIAN_OFF, KERNEL_3x3, KERNEL_5x5, KERNEL_7x7 (default)
-    depth.initialConfig.setMedianFilter(dai.MedianFilter.KERNEL_7x7)
+    depth.initialConfig.setMedianFilter(dai.MedianFilter.KERNEL_3x3)
     depth.setLeftRightCheck(True)
     depth.setExtendedDisparity(False)
     depth.setSubpixel(False)
@@ -78,14 +78,10 @@ class Depth(Node):
 
   def publish_depth(self):
     #depth
-    self.get_logger().info("publishing")
     inDisparity = self.queue_disp.get()
-    self.get_logger().info("got data")
     disp = inDisparity.getFrame()
-    self.get_logger().info("got frame")
     disp = (disp * (255 / self.maxDisparity)).astype(np.uint8)
     self.data.depth = self.bridge.cv2_to_imgmsg(disp, encoding="mono8")
-    self.get_logger().info("wrote to object")
 
     # RGB
     #inRgb = self.queue_rgb.get()
@@ -95,7 +91,7 @@ class Depth(Node):
     self.depth_publisher.publish(self.data)
 
   def display_data(self, data):
-    frame = self.bridge.imgmsg_to_cv2(data.disparity, desired_encoding="passthrough")
+    frame = self.bridge.imgmsg_to_cv2(data.depth, desired_encoding="passthrough")
     frame = cv2.applyColorMap(frame, cv2.COLORMAP_JET)
     cv2.imshow("disparity_color", frame)
     cv2.waitKey(1)
