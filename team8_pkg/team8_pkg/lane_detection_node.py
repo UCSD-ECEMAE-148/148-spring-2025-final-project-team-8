@@ -1,11 +1,13 @@
 import rclpy
 from rclpy.node import Node
-from sensor_msgs.msg import Image
+from sensor_msgs.msg import Image, LaserScan
 from std_msgs.msg import Float32, Int32, Int32MultiArray, Float32MultiArray
 import cv2
 from cv_bridge import CvBridge
 import numpy as np
 import os
+
+import statistics
 
 # Nodes in this program
 NODE_NAME = 'lane_detection_node'
@@ -13,6 +15,7 @@ NODE_NAME = 'lane_detection_node'
 # Topics subcribed/published to in this program
 CAMERA_TOPIC_NAME = '/camera/color/image_raw'
 CENTROID_TOPIC_NAME = '/location'
+LIDAR_TOPIC_NAME = '/scan'
 
 # DISTANCE CALCULATION CONST
 ONE_FT_PXL_DIAMETER = 150               # diameter of the object from 1 ft
@@ -26,6 +29,12 @@ class LaneDetection(Node):
         self.centroid_error = Float32MultiArray()
         self.camera_subscriber = self.create_subscription(Image, CAMERA_TOPIC_NAME, self.locate_centroid, 10)
         self.camera_subscriber
+        self.lidar_subscriber = self.create_subscription(LaserScan, LIDAR_TOPIC_NAME, self.update_ranges, 10)
+        self.lidar_subscriber
+        self.ranges = None
+        self.N = 0
+        self.n = 0
+
         self.bridge = CvBridge()
         self.max_num_lines_detected = 10
         self.image_width = 0
@@ -176,22 +185,13 @@ class LaneDetection(Node):
 
         # plotting contours and their centroids
         for contour in contours[:self.number_of_lines]:
-            #[x, y], r, phi = cv2.minAreaRect(contour)
-            #rect = cv2.minAreaRect(contour)
             (cx,cy), r = cv2.minEnclosingCircle(contour)
             cx = int(cx)
             cy = int(cy)
             r = int(r)
-            #if self.min_width < w < self.max_width:
             if self.min_width < r*2 < self.max_width:
                 try:
-                    #box = cv2.boxPoints(rect)
-                    #box = np.int0(box)
-                    #img = cv2.drawContours(img,[box], 0, (0, 255, 0), 3)
                     img = cv2.circle(img, (cx, cy), r, (0,255,0),3)
-                    #m = cv2.moments(contour) # moment of contour
-                    #cx = int(m['m10'] / m['m00']) # x_pos of centroid
-                    #cy = int(m['m01'] / m['m00']) # y_pos of centroid
                     
                     cx_list.append(cx)
                     cy_list.append(cy)
@@ -203,64 +203,20 @@ class LaneDetection(Node):
                     pass
         # Further image processing to determine optimal steering value
         try:
-            # When more than 1 road mark is found
-            if len(cx_list) > 1:
-                error_list = []
-                count = 0
-
-                # calculate errors for all detected road lines
-                for cx_pos in cx_list:
-                    error = float((cx_pos - cam_center_line_x) / cam_center_line_x)
-                    error_list.append(error)
-                
-                # finding average error of all road lines
-                avg_error = (sum(error_list) / float(len(error_list)))
-
-                # check difference in error from closest to furthest road line
-                p_horizon_diff = abs(error_list[0] - error_list[-1])
-
-                # if path is approximately straight, then steer towards average error
-                if abs(p_horizon_diff) <= self.error_threshold:
-                    error_x = avg_error
-                    pixel_error = int(cam_center_line_x * (1 + error_x))
-                    mid_x, mid_y = pixel_error, int((self.image_height/2))
-                    self.get_logger().info(f"Straight curve: [tracking error: {error_x}]")
-
-                # if path is curved, then steer towards minimum error
-                else: 
-                    # exclude any road lines within error threshold by making their error large
-                    for error in error_list:
-                        if abs(error) < self.error_threshold:
-                            error = 1
-                            error_list[count] = error
-                        count+=1
-                    
-                    # getting min error (closest roadline)
-                    error_x = min(error_list, key=abs)
-
-                    # get index of min error for plotting
-                    error_x_index = error_list.index(min(error_list, key=abs))
-                    mid_x, mid_y = cx_list[error_x_index], cy_list[error_x_index]
-                    self.get_logger().info(f"Curvy road: [tracking error: {error_x}]")
-                
-                # plotting roadline to be tracked
-                cv2.circle(img, (mid_x, mid_y), 7, (255, 0, 0), -1)
-                start_point_error = (cam_center_line_x, mid_y)
-                img = cv2.line(img, start_point_error, (mid_x, mid_y), (0,0,255), 4)
-
-                # publish error data
-                self.centroid_error.data = [float(error_x)]
-                self.centroid_error_publisher.publish(self.centroid_error)
-
             # When only 1 road mark was found 
-            elif len(cx_list) == 1:
+            if len(cx_list) == 1:
+                self.get_logger().info("found a thing")
                 mid_x, mid_y = cx_list[0], cy_list[0]
                 start_point_error = (cam_center_line_x, mid_y)
                 img = cv2.line(img, start_point_error, (mid_x, mid_y), (0,0,255), 4)
                 cv2.circle(img, (mid_x, mid_y), 7, (0, 0, 255), -1)
 
                 self.ek = float((mid_x - cam_center_line_x) / cam_center_line_x)
-                distance = DISTANCE_FUNC_COEF / r
+                lidar_center = int(2*self.n*(1 - mid_x / self.image_width))
+                self.get_logger().info(f"lidar center: {lidar_center}")
+                self.get_logger().info(f"{len(self.ranges)}")
+                distance = self.ranges[lidar_center]
+
                 self.get_logger().info(f"Found a guy: [tracking error: {self.ek}], [pixel radius: {r}], [distance prediction (in): {distance}]")
 
                 # publish error data
@@ -286,6 +242,12 @@ class LaneDetection(Node):
             cv2.waitKey(1)
         else:
             cv2.destroyAllWindows()
+    
+    def update_ranges(self, data):
+        if self.N == 0 and self.n == 0:
+            self.N = len(data.ranges)
+            self.n = int((self.N / 360.0) * 35)
+        self.ranges = data.ranges[-self.n:] + data.ranges[:self.n]
 
 
 def main(args=None):

@@ -12,12 +12,18 @@ def generate_launch_description():
         executable=node_name,
         output='screen')"""
   
-    depth_node = Node(
+    """depth_node = Node(
         package=package,
         executable='depth_node',
         output='screen'
+    )"""
+
+    lidar_node = Node(
+        package=package,
+        executable='lidar_node',
+        output='screen'
     )
         
-    ld.add_action(depth_node)
+    ld.add_action(lidar_node)
     return ld
 
