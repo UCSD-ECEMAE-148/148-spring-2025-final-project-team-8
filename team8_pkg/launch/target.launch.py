@@ -11,7 +11,7 @@ import yaml
 
 
 def generate_launch_description():
-    lane_detection2_package = 'mraysu_object_detection2_pkg'
+    lane_detection2_package = 'team8_pkg'
     calibration_file = 'ros_racer_calibration.yaml'
     ld_node_name = 'lane_detection_node'
     lg_node_name = 'lane_guidance_node'
