@@ -37,8 +37,8 @@ if(BUILD_TESTING)
 endif()
 
 rosidl_generate_interfaces(${PROJECT_NAME}
-  "msg/CameraData.msg"
-  DEPENDENCIES sensor_msgs std_msgs
+  "msg/LabeledCentroid.msg"
+  DEPENDENCIES std_msgs
 ) 
 
 # Export type support runtime

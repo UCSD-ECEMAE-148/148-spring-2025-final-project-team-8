@@ -7,10 +7,10 @@ def generate_launch_description():
 
     ld = LaunchDescription()
 
-    """target_node = Node(
+    target_node = Node(
         package=package,
         executable=node_name,
-        output='screen')"""
+        output='screen')
   
     """depth_node = Node(
         package=package,
@@ -18,12 +18,12 @@ def generate_launch_description():
         output='screen'
     )"""
 
-    lidar_node = Node(
+    """lidar_node = Node(
         package=package,
         executable='lidar_node',
         output='screen'
-    )
+    )"""
         
-    ld.add_action(lidar_node)
+    ld.add_action(target_node)
     return ld
 

@@ -1,19 +1,24 @@
 import rclpy
 from rclpy.node import Node
-from std_msgs.msg import String, Float32
+from custom_interfaces.msg import LabeledCentroid
+from depthai_sdk.classes import DetectionPacket
+from depthai_sdk import OakCamera
 
 NODE_NAME = "target_node"
-TOPIC_NAME = "/location"
+TOPIC_NAME = "/centroids"
 
 class Target(Node):
   def __init__(self):
     super().__init__(NODE_NAME)
-    self.centroid_publisher = self.create_publisher(Float32, TOPIC_NAME, 10)
+    self.centroid_publisher = self.create_publisher(LabeledCentroid, TOPIC_NAME, 10)
 
     def callback(packet: DetectionPacket):
         for d in packet.img_detections.detections:
-            (d.xmax - d.xmin) / 2 + d.xmin
-            
+            centroid = LabeledCentroid()
+            centroid.label = d.label
+            centroid.cx = (d.xmax - d.xmin) / 2 + d.xmin
+            selfcentroid_publisher.publish(centroid)
+
 
     with OakCamera() as oak:
         color = oak.create_camera('color')

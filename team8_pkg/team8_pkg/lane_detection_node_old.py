@@ -2,7 +2,6 @@ import rclpy
 from rclpy.node import Node
 from sensor_msgs.msg import Image, LaserScan
 from std_msgs.msg import Float32, Int32, Int32MultiArray, Float32MultiArray
-from custom_interfaces.msg import LabeledCentroid
 import cv2
 from cv_bridge import CvBridge
 import numpy as np
@@ -14,11 +13,9 @@ import statistics
 NODE_NAME = 'lane_detection_node'
 
 # Topics subcribed/published to in this program
-CAMERA_TOPIC_NAME = '/centroids'
+CAMERA_TOPIC_NAME = '/camera/color/image_raw'
 CENTROID_TOPIC_NAME = '/location'
 LIDAR_TOPIC_NAME = '/scan'
-LABEL = 2
-CAM_CENTER = 0.5
 
 # DISTANCE CALCULATION CONST
 ONE_FT_PXL_DIAMETER = 150               # diameter of the object from 1 ft
@@ -37,6 +34,85 @@ class LaneDetection(Node):
         self.ranges = None
         self.N = 0
         self.n = 0
+
+        self.bridge = CvBridge()
+        self.max_num_lines_detected = 10
+        self.image_width = 0
+        self.image_height = 0
+        self.start_height = 0
+        self.bottom_height = 0
+        self.left_width = 0
+        self.right_width = 0
+        self.error_threshold = 0.1
+        self.declare_parameters(
+            namespace='',
+            parameters=[
+                ('Hue_low', 1),
+                ('Hue_high', 1),
+                ('Saturation_low', 1),
+                ('Saturation_high', 1),
+                ('Value_low', 1),
+                ('Value_high', 1),
+                ('gray_lower', 1),
+                ('inverted_filter', 0),
+                ('kernal_size',1),
+                ('erosion_itterations',1),
+                ('dilation_itterations',1),
+                ('number_of_lines', 0),
+                ('error_threshold', 0),
+                ('Width_min', 1),
+                ('Width_max', 1),
+                ('crop_width_decimal',0.8),
+                ('rows_to_watch_decimal',0.2),
+                ('rows_offset_decimal',0.5),
+                ('camera_centerline',0.5),
+                ('debug_cv', 0)
+            ])
+        self.Hue_low = self.get_parameter('Hue_low').value
+        self.Hue_high = self.get_parameter('Hue_high').value
+        self.Saturation_low = self.get_parameter('Saturation_low').value
+        self.Saturation_high = self.get_parameter('Saturation_high').value
+        self.Value_low = self.get_parameter('Value_low').value
+        self.Value_high = self.get_parameter('Value_high').value
+        self.gray_lower = self.get_parameter('gray_lower').value
+        self.inverted_filter = self.get_parameter('inverted_filter').value
+        self.kernal_size = self.get_parameter('kernal_size').value
+        self.erosion_itterations = self.get_parameter('erosion_itterations').value
+        self.dilation_itterations = self.get_parameter('dilation_itterations').value
+        self.number_of_lines = self.get_parameter('number_of_lines').value
+        self.error_threshold = self.get_parameter('error_threshold').value
+        self.min_width = self.get_parameter('Width_min').value
+        self.max_width = self.get_parameter('Width_max').value
+        self.crop_width_decimal = self.get_parameter('crop_width_decimal').value
+        self.rows_to_watch_decimal = self.get_parameter('rows_to_watch_decimal').value
+        self.rows_offset_decimal = self.get_parameter('rows_offset_decimal').value
+        self.camera_centerline = self.get_parameter('camera_centerline').value
+        self.debug_cv = self.get_parameter('debug_cv').value
+        
+        self.camera_init = False
+        
+        self.get_logger().info(
+            f'\nHue_low: {self.Hue_low}'
+            f'\nHue_high: {self.Hue_high}'
+            f'\nSaturation_low: {self.Saturation_low}'
+            f'\nSaturation_high: {self.Saturation_high}'
+            f'\nValue_low: {self.Value_low}'
+            f'\nValue_high: {self.Value_high}'
+            f'\ngray_lower: {self.gray_lower}'
+            f'\ninverted_filter: {self.inverted_filter}'
+            f'\nkernal_size: {self.kernal_size}'
+            f'\nerosion_itterations: {self.erosion_itterations}'
+            f'\ndilation_itterations: {self.dilation_itterations}'
+            f'\nnumber_of_lines: {self.number_of_lines}'
+            f'\nerror_threshold: {self.error_threshold}'
+            f'\nmin_width: {self.min_width}'
+            f'\nmax_width: {self.max_width}'
+            f'\ncrop_width_decimal: {self.crop_width_decimal}'
+            f'\nrows_to_watch_decimal: {self.rows_to_watch_decimal}'
+            f'\nrows_offset_decimal: {self.rows_offset_decimal}'
+            f'\ncamera_centerline: {self.camera_centerline}'
+            f'\ndebug_cv: {self.debug_cv}')
+
 
     def locate_centroid(self, data):
         # Image processing from rosparams
@@ -127,16 +203,21 @@ class LaneDetection(Node):
                     pass
         # Further image processing to determine optimal steering value
         try:
-            # When centroid with our label gets detected
-            if data.label == LABEL:
-                mid_x = data.cx     #mid_x is a percentage of screen
-                self.ek = float(mid_x - CAM_CENTER)
-                lidar_center = int(2*self.n*(1 - mid_x))
+            # When only 1 road mark was found 
+            if len(cx_list) == 1:
+                self.get_logger().info("found a thing")
+                mid_x, mid_y = cx_list[0], cy_list[0]
+                start_point_error = (cam_center_line_x, mid_y)
+                img = cv2.line(img, start_point_error, (mid_x, mid_y), (0,0,255), 4)
+                cv2.circle(img, (mid_x, mid_y), 7, (0, 0, 255), -1)
+
+                self.ek = float((mid_x - cam_center_line_x) / cam_center_line_x)
+                lidar_center = int(2*self.n*(1 - mid_x / self.image_width))
                 self.get_logger().info(f"lidar center: {lidar_center}")
                 self.get_logger().info(f"{len(self.ranges)}")
                 distance = self.ranges[lidar_center]
 
-                self.get_logger().info(f"Found a guy: [tracking error: {self.ek}], [label: {data.label}] [distance prediction (in): {distance}]")
+                self.get_logger().info(f"Found a guy: [tracking error: {self.ek}], [pixel radius: {r}], [distance prediction (in): {distance}]")
 
                 # publish error data
                 self.centroid_error.data = [float(self.ek), distance]
