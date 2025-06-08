@@ -30,7 +30,7 @@ class LaneDetection(Node):
         self.centroid_error_publisher = self.create_publisher(Float32MultiArray, CENTROID_TOPIC_NAME, 10)
         self.centroid_error_publisher
         self.centroid_error = Float32MultiArray()
-        self.camera_subscriber = self.create_subscription(Image, CAMERA_TOPIC_NAME, self.locate_centroid, 10)
+        self.camera_subscriber = self.create_subscription(LabeledCentroid, CAMERA_TOPIC_NAME, self.locate_centroid, 10)
         self.camera_subscriber
         self.lidar_subscriber = self.create_subscription(LaserScan, LIDAR_TOPIC_NAME, self.update_ranges, 10)
         self.lidar_subscriber
