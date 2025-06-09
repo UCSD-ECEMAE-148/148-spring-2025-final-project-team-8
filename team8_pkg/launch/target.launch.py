@@ -41,7 +41,14 @@ def generate_launch_description():
         output='screen',
     )
 
+    control_node = Node(
+        package=lane_detection2_package,
+        executable='control_node',
+        output='screen'
+    )
+
     ld.add_action(lane_detection_node)
     ld.add_action(lane_guidance_node)
     ld.add_action(target_node)
+    ld.add_action(control_node)
     return ld

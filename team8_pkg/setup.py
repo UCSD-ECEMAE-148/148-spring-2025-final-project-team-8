@@ -28,7 +28,8 @@ setup(
             "depth_node = team8_pkg.depth_node:main",
             "lidar_node = team8_pkg.lidar_node:main",
             'lane_detection_node = team8_pkg.lane_detection_node:main',
-            'lane_guidance_node = team8_pkg.lane_guidance_node:main'
+            'lane_guidance_node = team8_pkg.lane_guidance_node:main',
+            'control_node = team8_pkg.control_node:main'
         ],
     },
 )

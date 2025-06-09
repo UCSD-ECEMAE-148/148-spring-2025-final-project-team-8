@@ -17,7 +17,7 @@ NODE_NAME = 'lane_detection_node'
 CAMERA_TOPIC_NAME = '/centroids'
 CENTROID_TOPIC_NAME = '/location'
 LIDAR_TOPIC_NAME = '/scan'
-LABEL = 0
+LABEL = 1
 CAM_CENTER = 0.5
 
 # DISTANCE CALCULATION CONST
