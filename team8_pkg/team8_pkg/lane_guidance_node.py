@@ -5,10 +5,22 @@ from geometry_msgs.msg import Twist
 import time
 import os
 
+from enum import Enum
+
 NODE_NAME = 'lane_guidance_node'
 CENTROID_TOPIC_NAME = '/location'
 ACTUATOR_TOPIC_NAME = '/cmd_vel'
+THRESHOLD_DIST = 0.5
+THRESHOLD_VAR = 0.1
 
+class DistanceState(Enum):
+    INRANGE = 1
+    FAR = 2
+    NEAR = 3
+class AngleState(Enum):
+    CENTER = 1
+    RIGHT = 2
+    LEFT = 3
 
 class PathPlanner(Node):
     def __init__(self):
@@ -82,14 +94,55 @@ class PathPlanner(Node):
         steering_float_raw = self.proportional_error + self.derivative_error + self.integral_error
         steering_float = self.clamp(steering_float_raw, self.max_right_steering, self.max_left_steering)
 
+        # check state
+        distance_state = 0
+        angle_state = 0
+        if abs(self.ek) < abs(self.error_threshold):
+            self.get_logger().info("Dead ahead!")
+            angle_state = AngleState.CENTER
+        else:
+            if self.ek > 0:
+                self.get_logger().info("Left!")
+                angle_state = AngleState.LEFT
+            else:
+                self.get_logger().info("Right!")
+                angle_state = AngleState.RIGHT
+        
+        if self.distance > THRESHOLD_DIST - THRESHOLD_VAR:
+            if self.distance < THRESHOLD_DIST + THRESHOLD_VAR:
+                self.get_logger().info("In range!")
+                distance_state = DistanceState.INRANGE
+            else:
+                self.get_logger().info("Too far!")
+                distance_state = DistanceState.FAR
+        else:
+            self.get_logger().info("Too close!")
+            distance_state = DistanceState.NEAR
+        
+        #handle state
+        # in range
+        if distance_state == DistanceState.INRANGE: 
+            if angle_state == AngleState.CENTER:
+                # if centered, do nothing
+                throttle_float = self.zero_throttle
+            else:                               
+                # if not centered, reverse to face the centroid
+                throttle_float = -throttle_float
+                steering_float = -steering_float
+        # too cloase
+        if distance_state == DistanceState.NEAR:
+            # reverse to face
+            throttle_float = -throttle_float
+            steering_float = -steering_float
+        #if distance_state == DistanceState.FAR:
+            # work as usual
+        
+
         # Publish values
         try:
             # publish control signals
-            self.twist_cmd.angular.z = steering_float
-            if self.distance > 12.0:
-                self.twist_cmd.linear.x = throttle_float
-            else:
-                self.twist_cmd.linear.x = self.zero_throttle
+            self.twist_cmd.angular.z = float(steering_float)
+            self.twist_cmd.linear.x = float(throttle_float)
             self.twist_publisher.publish(self.twist_cmd)
 
             # shift current time and error values to previous values
