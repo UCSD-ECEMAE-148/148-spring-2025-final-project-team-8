@@ -7,32 +7,36 @@ from depthai_sdk import OakCamera
 NODE_NAME = "target_node"
 TOPIC_NAME = "/centroids"
 
+MODEL_NAME = "detect-buckets/1"
+
 class Target(Node):
   def __init__(self):
     super().__init__(NODE_NAME)
     self.centroid_publisher = self.create_publisher(LabeledCentroid, TOPIC_NAME, 10)
+    self.model_loaded = False
 
     def callback(packet: DetectionPacket):
+        if not self.model_loaded:
+            self.get_logger().info(f'Successfully loaded model: {MODEL_NAME}')
+            self.model_loaded = True
+
         for d in packet.img_detections.detections:
             centroid = LabeledCentroid()
             centroid.label = d.label
             centroid.cx = (d.xmax - d.xmin) / 2 + d.xmin
-            selfcentroid_publisher.publish(centroid)
+            self.centroid_publisher.publish(centroid)
 
 
     with OakCamera() as oak:
         color = oak.create_camera('color')
         model_config = {
             'source': 'roboflow', # Specify that we are downloading the model from Roboflow
-            'model':'detect-faces-m1pbd/6',
+            'model': MODEL_NAME,
             'key':'3omR0u9ATOe8U1rQmZwo'
         }
         nn = oak.create_nn(model_config, color)
         oak.visualize([nn], fps=True, callback=callback)
         oak.start(blocking=True)
-  
-  def handle_prompt(self, data):
-    self.get_logger().info(data.data)
   
 def main():
   rclpy.init()
