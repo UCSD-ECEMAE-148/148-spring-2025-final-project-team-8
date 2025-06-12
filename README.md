@@ -7,9 +7,9 @@
 ## Members
 Alexandra Dinh -- Electrical Engineering
 
-Hunter Hayes -- Mechanical Engineering
+Hunter Hayes -- Aerospace Engineering
 
-Sean Stillwell -- Mechanical Engineering
+Sean Stillwell -- Aerospace Engineering
 
 Michael Sullivan -- Mathematics: Computer Science
 
