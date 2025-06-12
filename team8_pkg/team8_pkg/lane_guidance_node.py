@@ -12,10 +12,11 @@ CENTROID_TOPIC_NAME = '/location'
 ACTUATOR_TOPIC_NAME = '/cmd_vel'
 CONTROL_INPUT_TOPIC_NAME = '/cin'
 CONTROL_OUTPUT_TOPIC_NAME = '/cout'
-THRESHOLD_DIST = 2
-THRESHOLD_VAR = 0.04
-THRESHOLD_VAR_FINE = 0.1
-LOCKON = 3
+THRESHOLD_DIST = 2.07
+THRESHOLD_VAR = 0.03
+THRESHOLD_VAR_FINE = 0.2
+LOCKON = 2
+BIAS = 0.04
 
 class DistanceState(Enum):
     INRANGE = 1
@@ -96,6 +97,7 @@ class PathPlanner(Node):
     def controller(self, data):
         if not self.launch:
             self.get_logger().info("Waiting for Launch...")
+            #self.get_logger().info(f"Distance: {data.data[1]}")
             return
         #ignore input if locked on
         if self.lockon:
@@ -124,7 +126,7 @@ class PathPlanner(Node):
         # check state
         distance_state = 0
         angle_state = 0
-        if abs(self.ek) < abs(self.error_threshold):
+        if self.ek < BIAS + self.error_threshold and self.ek > BIAS - self.error_threshold:
             self.get_logger().info("Dead ahead!")
             angle_state = AngleState.CENTER
         else:
@@ -151,6 +153,7 @@ class PathPlanner(Node):
             self.fine_counter += 1
         else:
             self.fine_counter = 0
+            self.fine = False
         
         if self.fine_counter >= 5:
             self.fine = True
@@ -196,7 +199,7 @@ class PathPlanner(Node):
                 time.sleep(0.1)
                 self.twist_cmd.linear.x = self.zero_throttle
                 self.twist_publisher.publish(self.twist_cmd)
-                time.sleep(0.8)
+                time.sleep(1.5)
 
             # shift current time and error values to previous values
             self.ek_1 = self.ek

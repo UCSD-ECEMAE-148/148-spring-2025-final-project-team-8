@@ -7,7 +7,7 @@ lane_detection_node:
     Value_low : 49 
     Value_high : 255 
     number_of_lines : 1 
-    error_threshold : 0.05 
+    error_threshold : 0.02 
     Width_min : 0 
     Width_max : 500 
     gray_lower : 61 
@@ -44,7 +44,7 @@ lane_guidance_node:
   ros__parameters: 
     Kp_steering : 0.9 
     Ki_steering : 0.0 
-    Kd_steering : 0.4 
+    Kd_steering : 0.0
     zero_throttle  : 0.0 
     max_throttle : 1
     min_throttle : 0.5

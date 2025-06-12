@@ -49,7 +49,7 @@ class LaneDetection(Node):
                 #self.get_logger().info(f"{len(self.ranges)}")
                 distance = min(self.ranges[lidar_center-3: lidar_center+3])
 
-                #self.get_logger().info(f"Found a guy: [tracking error: {self.ek}], [label: {data.label}] [distance prediction (m): {distance}]")
+                self.get_logger().info(f"Found a guy: [tracking error: {self.ek}], [label: {data.label}] [distance prediction (m): {distance}]")
 
                 # publish error data
                 self.centroid_error.data = [float(self.ek), distance]
